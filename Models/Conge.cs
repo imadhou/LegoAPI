@@ -11,7 +11,7 @@ namespace LegoApi.Models
     {
         Maladie, Vacances, Maternite, Autres
     }
-    public class Conge
+    public class Conge: IEntity
     {
         public int ID { get; set; }
         [Required]

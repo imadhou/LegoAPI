@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LegoApi.Migrations
 {
-    public partial class init : Migration
+    public partial class third : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,12 +39,12 @@ namespace LegoApi.Migrations
                 name: "Employes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     email = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TypeEmploye = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Application = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Langue = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     NbFollowers = table.Column<int>(type: "int", nullable: true),
@@ -54,7 +54,7 @@ namespace LegoApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employes", x => x.Id);
+                    table.PrimaryKey("PK_Employes", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Employes_Services_ServiceId",
                         column: x => x.ServiceId,
@@ -70,7 +70,7 @@ namespace LegoApi.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Duree = table.Column<int>(type: "int", nullable: false),
-                    DateDebut = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 8, 17, 3, 22, 38, 317, DateTimeKind.Local).AddTicks(6821)),
+                    DateDebut = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 8, 20, 19, 2, 23, 666, DateTimeKind.Local).AddTicks(7629)),
                     EmployeId = table.Column<int>(type: "int", nullable: false),
                     CongeID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -87,7 +87,7 @@ namespace LegoApi.Migrations
                         name: "FK_EmployeConges_Employes_EmployeId",
                         column: x => x.EmployeId,
                         principalTable: "Employes",
-                        principalColumn: "Id",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 

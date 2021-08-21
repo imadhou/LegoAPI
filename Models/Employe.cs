@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace LegoApi.Models
 {
-    public class Employe
+    public class Employe : IEntity
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(250)]

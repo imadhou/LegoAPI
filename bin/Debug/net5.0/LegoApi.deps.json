@@ -33,7 +33,6 @@
     ".NETCoreApp,Version=v5.0": {
       "LegoApi/1.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "5.0.9",
           "Microsoft.EntityFrameworkCore.Design": "5.0.9",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.9",
           "Swashbuckle.AspNetCore": "6.1.5",

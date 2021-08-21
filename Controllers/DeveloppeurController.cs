@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LegoApi.Data.Services
+namespace LegoApi.Controllers
 {
-    public class ServiceService
+    public class DeveloppeurController
     {
     }
 }

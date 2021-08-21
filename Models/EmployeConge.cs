@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LegoApi.Models
 {
-    public class EmployeConge
+    public class EmployeConge : IEntity
     {
         public int ID { get; set; }
         public int Duree { get; set; }

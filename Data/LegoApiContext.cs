@@ -25,6 +25,9 @@ namespace LegoApi.Data
         {
             modelBuilder.Entity<Developpeur>().HasBaseType<Employe>();
             modelBuilder.Entity<ContentManager>().HasBaseType<Employe>();
+            modelBuilder.Entity<Employe>().HasDiscriminator<string>("TypeEmploye")
+                .HasValue<Developpeur>("Developpeur")
+                .HasValue<ContentManager>("ContentManager");
 
             modelBuilder.Entity<EmployeConge>()
                 .HasOne(e => e.Employe)

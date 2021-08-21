@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LegoApi.Models
 {
-    public class Service
+    public class Service : IEntity
     {
         public int ID { get; set; }
 

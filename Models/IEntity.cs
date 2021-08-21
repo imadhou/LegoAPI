@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LegoApi.Data.Services
+namespace LegoApi.Models
 {
-    public class CongeService
+    public interface IEntity
     {
+        int ID { get; set; }
     }
 }

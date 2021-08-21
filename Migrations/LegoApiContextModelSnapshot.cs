@@ -39,14 +39,10 @@ namespace LegoApi.Migrations
 
             modelBuilder.Entity("LegoApi.Models.Employe", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -56,18 +52,22 @@ namespace LegoApi.Migrations
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
+                    b.Property<string>("TypeEmploye")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.HasIndex("ServiceId");
 
                     b.ToTable("Employes");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Employe");
+                    b.HasDiscriminator<string>("TypeEmploye").HasValue("Employe");
                 });
 
             modelBuilder.Entity("LegoApi.Models.EmployeConge", b =>
@@ -83,7 +83,7 @@ namespace LegoApi.Migrations
                     b.Property<DateTime>("DateDebut")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 8, 17, 3, 22, 38, 317, DateTimeKind.Local).AddTicks(6821));
+                        .HasDefaultValue(new DateTime(2021, 8, 20, 19, 2, 23, 666, DateTimeKind.Local).AddTicks(7629));
 
                     b.Property<int>("Duree")
                         .HasColumnType("int");

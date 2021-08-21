@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using LegoApi.Data;
 using Microsoft.EntityFrameworkCore;
+using LegoApi.Repos;
 
 namespace LegoApi
 {
@@ -24,6 +25,7 @@ namespace LegoApi
 
             services.AddDbContext<LegoApiContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
