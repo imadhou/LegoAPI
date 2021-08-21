@@ -14,6 +14,7 @@ namespace LegoApi.Repos
         Task Add(TEntity entity);
         Task Update(TEntity entity);
         Task Remove(int id);
+        Task Save();
 
     }
 }

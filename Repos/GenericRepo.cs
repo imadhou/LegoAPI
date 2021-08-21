@@ -47,5 +47,10 @@ namespace LegoApi.Repos
             context.Set<TEentity>().Update(entity);
             await context.SaveChangesAsync();
         }
+
+        public async Task Save()
+        {
+            await context.SaveChangesAsync();
+        }
     }
 }
