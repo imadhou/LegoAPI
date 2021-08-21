@@ -2,9 +2,8 @@
 using LegoApi.Repos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LegoApi.Controllers
@@ -15,18 +14,33 @@ namespace LegoApi.Controllers
     {
         private readonly Repos.IGenericRepo<Developpeur> repo;
         private readonly IGenericRepo<EmployeConge> empcng;
+        private readonly IGenericRepo2<Developpeur> devrep;
 
-        public DeveloppeurController(IGenericRepo<Developpeur> repo, IGenericRepo<EmployeConge> empcng)
+        public DeveloppeurController(IGenericRepo<Developpeur> repo, IGenericRepo<EmployeConge> empcng, IGenericRepo2<Developpeur> devrep)
         {
             this.repo = repo;
             this.empcng = empcng;
+            this.devrep = devrep;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Developpeur>))]
-        public async Task<IActionResult> GetAllDevs()
+        public IActionResult GetAllDevss()
         {
-            return Ok(await repo.GetMany());
+            return Ok(devrep.GetMuliple(include:(
+                s => s.Include(s => s.EmployeConges)
+                )));
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Developpeur))]
+        [Route("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok(devrep.GetFirstOrDefault(
+                predicate: d => d.ID == id,
+                include: s => s.Include(s=> s.EmployeConges)
+                ));
         }
 
         [HttpPost]

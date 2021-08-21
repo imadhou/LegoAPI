@@ -26,6 +26,7 @@ namespace LegoApi
             services.AddDbContext<LegoApiContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+            services.AddScoped(typeof(IGenericRepo2<>), typeof(GenericRepo2<>));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
