@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace LegoApi.Models
@@ -18,6 +19,7 @@ namespace LegoApi.Models
         [Required]
         [MaxLength(250)]
         public string Locale { get; set; }
+        [JsonIgnore]
         public List<Employe> Employes { get; set; }
     }
 }

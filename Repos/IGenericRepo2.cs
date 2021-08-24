@@ -30,5 +30,6 @@ namespace LegoApi.Repos
             );
         void Update(TEntity entity);
         void Delete(int id);
+       
     }
 }

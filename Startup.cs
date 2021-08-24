@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using LegoApi.Data;
 using Microsoft.EntityFrameworkCore;
 using LegoApi.Repos;
+using System;
 
 namespace LegoApi
 {
@@ -27,6 +28,7 @@ namespace LegoApi
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
             services.AddScoped(typeof(IGenericRepo2<>), typeof(GenericRepo2<>));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

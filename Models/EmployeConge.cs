@@ -16,7 +16,6 @@ namespace LegoApi.Models
         [JsonIgnore]
         public Employe Employe { get; set; }
         public int CongeID { get; set; }
-        [JsonIgnore]
         public Conge Conge { get; set; }
     }
 }

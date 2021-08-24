@@ -101,7 +101,6 @@ namespace LegoApi.Repos
                 return query.ToList();
             }
         }
-
         public virtual void Update(TEntity entity)
         {
             _dbSet.Update(entity);
