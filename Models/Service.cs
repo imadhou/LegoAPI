@@ -19,7 +19,6 @@ namespace LegoApi.Models
         [Required]
         [MaxLength(250)]
         public string Locale { get; set; }
-        [JsonIgnore]
         public List<Employe> Employes { get; set; }
     }
 }
