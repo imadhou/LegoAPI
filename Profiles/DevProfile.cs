@@ -12,20 +12,35 @@ namespace LegoApi.Profiles
     {
         public DevProfile()
         {
-            CreateMap<Developpeur, DevCr>();
-            CreateMap<DevCr, Developpeur>();
+            CreateMap<Developpeur, DeveloperAdd>();
+            CreateMap<DeveloperAdd, Developpeur>();
 
+            CreateMap<Developpeur, DeveloppeurRead>();
+            CreateMap<DeveloppeurRead, Developpeur>();
 
             CreateMap<Conge, CongeDTO>();
             CreateMap<CongeDTO, Conge>();
 
+            CreateMap<Service, ServiceDto>();
+            CreateMap<ServiceDto, Service>();
+
+
+            CreateMap<EmployeCongeAddDTO, EmployeConge>()
+                .ForMember(e => e.CongeID, c => c.MapFrom(e => e.CongeID));
+            CreateMap<EmployeConge, EmployeCongeAddDTO>()
+                .ForMember(e => e.CongeID, c => c.MapFrom(e => e.Conge.ID));
+               
+
             CreateMap<EmployeConge, CongeEmplDTO>()
                 .ForMember(e => e.CongeDTO, o => o.MapFrom(e => e.Conge));
-            CreateMap<CongeEmplDTO, EmployeConge>();
+            CreateMap<CongeEmplDTO, EmployeConge>()
+                .ForMember(e => e.Conge, o=> o.MapFrom(e => e.CongeDTO));
 
 
             CreateMap<Developpeur, DeveloppeurRead>()
                 .ForMember(b => b.Conges, o => o.MapFrom(c => c.EmployeConges));
+
+            
 
         }
     }

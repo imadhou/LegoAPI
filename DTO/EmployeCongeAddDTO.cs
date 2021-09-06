@@ -1,5 +1,4 @@
-﻿using LegoApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace LegoApi.DTO
 {
-    public class CongeDTO
+    public class EmployeCongeAddDTO
     {
         [Required]
-        public Raison Raison { get; set; }
+        public int Duree { get; set; }
         [Required]
-        public bool EstPayee { get; set; }
+        public DateTime DateDebut { get; set; }
+        [Required]
+        public int CongeID { get; set; }
     }
 }

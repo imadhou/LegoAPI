@@ -8,6 +8,15 @@ using LegoApi.Data;
 using Microsoft.EntityFrameworkCore;
 using LegoApi.Repos;
 using System;
+using LegoApi.Repos.EmployeRepo;
+using LegoApi.Repos.ServiceRepo;
+using LegoApi.Repos.CongeRepo;
+using LegoApi.Repos.EmployeCongeRepo;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using LegoApi.Extensions;
+using LegoApi.Middleware;
 
 namespace LegoApi
 {
@@ -26,8 +35,10 @@ namespace LegoApi
 
             services.AddDbContext<LegoApiContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
-            services.AddScoped(typeof(IGenericRepo2<>), typeof(GenericRepo2<>));
+            services.AddScoped< IEmployeRepo, EmployeRepo>();
+            services.AddScoped< IServiceRepo, ServiceRepo>();
+            services.AddScoped< ICongeRepo, CongeRepo>();
+            services.AddScoped< IEmployeCongeRepo, EmployeCongeRepo>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -42,13 +53,16 @@ namespace LegoApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
+            // app.ConfigureExceptionHandler(env);
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseCors();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LegoApi v1"));
             }
+            
 
             app.UseHttpsRedirection();
 

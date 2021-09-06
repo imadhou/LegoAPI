@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LegoApi.Migrations
 {
     [DbContext(typeof(LegoApiContext))]
-    [Migration("20210820170224_third")]
-    partial class third
+    [Migration("20210902221920_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,11 @@ namespace LegoApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -57,11 +62,6 @@ namespace LegoApi.Migrations
                     b.Property<string>("TypeEmploye")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("ID");
 
@@ -85,7 +85,7 @@ namespace LegoApi.Migrations
                     b.Property<DateTime>("DateDebut")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 8, 20, 19, 2, 23, 666, DateTimeKind.Local).AddTicks(7629));
+                        .HasDefaultValue(new DateTime(2021, 9, 3, 0, 19, 20, 330, DateTimeKind.Local).AddTicks(9204));
 
                     b.Property<int>("Duree")
                         .HasColumnType("int");

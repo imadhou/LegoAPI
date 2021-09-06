@@ -14,11 +14,11 @@ namespace LegoApi.Models
 
         [Required]
         [MaxLength(250)]
-        public string Nom { get; set; }
-
+        public string Email { get; set; }
         [Required]
         [MaxLength(250)]
-        public string email { get; set; }
+        public string Nom { get; set; }
+
 
         public int ServiceId { get; set; }
         public Service Service { get; set; }

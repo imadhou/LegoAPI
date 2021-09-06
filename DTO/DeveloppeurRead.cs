@@ -9,7 +9,7 @@ namespace LegoApi.DTO
     {
  
         public string Nom { get; set; }
-        public string email { get; set; }
+        public string Email { get; set; }
         public string Post { get; set; }
         public string Langage { get; set; }
         public int Experience { get; set; }

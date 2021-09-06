@@ -13,8 +13,11 @@ namespace LegoApi.Models
         public int Duree { get; set; }
         public DateTime DateDebut { get; set; }
         public int EmployeId { get; set; }
+        [JsonIgnore]
         public Employe Employe { get; set; }
         public int CongeID { get; set; }
+        [JsonIgnore]
+
         public Conge Conge { get; set; }
     }
 }

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace LegoApi.DTO
 {
-    public class DevCr
+    public class DeveloperAdd
     {
-        [Required]
+        [Required(ErrorMessage = "Le nom est requis pour ajouter un employer")]
         [MaxLength(250)]
         public string Nom { get; set; }
 
         [Required]
         [MaxLength(250)]
-        public string email { get; set; }
+        public string Email { get; set; }
         [Required]
         [MaxLength(100)]
         public string Post { get; set; }
@@ -23,7 +23,10 @@ namespace LegoApi.DTO
         [MaxLength(100)]
         public string Langage { get; set; }
 
+        [Required]
         public int Experience { get; set; }
+
+        [Required]
         public int ServiceID { get; set; }
     }
 }

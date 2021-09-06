@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LegoApi.Migrations
 {
-    public partial class third : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,8 +41,8 @@ namespace LegoApi.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Nom = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    email = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
                     TypeEmploye = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Application = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
@@ -70,7 +70,7 @@ namespace LegoApi.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Duree = table.Column<int>(type: "int", nullable: false),
-                    DateDebut = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 8, 20, 19, 2, 23, 666, DateTimeKind.Local).AddTicks(7629)),
+                    DateDebut = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 9, 3, 0, 19, 20, 330, DateTimeKind.Local).AddTicks(9204)),
                     EmployeId = table.Column<int>(type: "int", nullable: false),
                     CongeID = table.Column<int>(type: "int", nullable: false)
                 },

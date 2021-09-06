@@ -1,5 +1,8 @@
-﻿using LegoApi.Models;
+﻿using AutoMapper;
+using LegoApi.DTO;
+using LegoApi.Models;
 using LegoApi.Repos;
+using LegoApi.Repos.CongeRepo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,33 +14,38 @@ namespace LegoApi.Controllers
 {
     [ApiController]
     [Route("/api/v1/conges")]
-    public class CongeController: ControllerBase
+    public class CongeController : ControllerBase
     {
-        private readonly IGenericRepo<Conge> repo;
+        private readonly ICongeRepo repo;
+        private readonly IMapper mapper;
 
-        public CongeController(IGenericRepo<Conge> repo)
+        public CongeController(ICongeRepo repo, IMapper mapper)
         {
             this.repo = repo;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Conge>))]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAllConges()
         {
-            return Ok(await repo.GetMany());
+            return Ok(repo.getAllConges());
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Conge))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Add([FromBody] Conge conge)
+        public IActionResult AddConge([FromBody] CongeDTO conge)
         {
-            if(conge == null)
             {
-                return BadRequest();
+                if (conge == null)
+                {
+                    return BadRequest();
+                }
+                var con = mapper.Map<Conge>(conge);
+                repo.AddConge(con);
+                return Created("todo", conge);
             }
-            await repo.Add(conge);
-            return Created("todo", conge);
         }
     }
 }

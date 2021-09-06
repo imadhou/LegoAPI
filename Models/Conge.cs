@@ -20,6 +20,7 @@ namespace LegoApi.Models
         public Raison Raison { get; set; }
         [Required]
         public bool EstPayee { get; set; }
+        [JsonIgnore]
         public List<EmployeConge> EmployeConges { get; set; }
     }
 }
