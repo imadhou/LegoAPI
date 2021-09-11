@@ -11,5 +11,6 @@ namespace LegoApi.Repos.CongeRepo
     {
         void AddConge(Conge conge);
         IEnumerable<Conge> getAllConges();
+        Conge GetCongeById(int id);
     }
 }

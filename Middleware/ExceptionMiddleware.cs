@@ -1,5 +1,6 @@
 ﻿using LegoApi.Errors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Text.Json;
+using Microsoft.Data.SqlClient;
 
 namespace LegoApi.Middleware
 {
@@ -35,6 +38,30 @@ namespace LegoApi.Middleware
             {
                 ApiError response;
                 HttpStatusCode statuscode = HttpStatusCode.InternalServerError;
+                string message;
+                var exceptionType = ex.GetType();
+
+                if(exceptionType == typeof(InUseException))
+                {
+                    statuscode = HttpStatusCode.BadRequest;
+                    //replace ex.Message
+                    message = ex.Message;
+                }
+
+                if(exceptionType == typeof(RequiredFieldNotFoundException))
+                {
+                    statuscode = HttpStatusCode.BadRequest;
+                    //replace ex.Message
+                    message = ex.Message;
+                }
+
+                if(exceptionType == typeof(RessourceNotFoundException))
+                {
+                    statuscode = HttpStatusCode.NotFound;
+                    //replace ex.Message
+                    message = ex.Message;
+                }
+
                 if (env.IsDevelopment())
                 {
                     response = new ApiError((int)statuscode, ex.Message, ex.StackTrace.ToString());
@@ -43,7 +70,7 @@ namespace LegoApi.Middleware
                 {
                     response = new ApiError((int)statuscode, ex.Message);
                 }
-                logger.LogError(ex, ex.Message);
+                //logger.LogError(ex.InnerException, ex.InnerException.Message);
 
                 context.Response.StatusCode = (int)statuscode;
                 context.Response.ContentType = "application/json";

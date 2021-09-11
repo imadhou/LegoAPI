@@ -36,6 +36,11 @@ namespace LegoApi.Repos.EmployeRepo
             return context.Employes.ToList();
         }
 
+        public Employe GetByEmail(string email)
+        {
+            return context.Employes.FirstOrDefault(e => e.Email == email);
+        }
+
         //For updating entities
         public async Task<bool> SaveAsync()
         {
@@ -59,5 +64,10 @@ namespace LegoApi.Repos.EmployeRepo
         {
             return context.EmployeConges.Where(e => e.EmployeId == id).ToList();
         }
+        public int TotalConges(int id, int annee)
+        {
+            return context.EmployeConges.Where(e => e.EmployeId == id).Where(e => e.DateDebut.Year >= annee && e.DateDebut.Year < annee+1).Sum(e => e.Duree);
+        }
+
     }
 }

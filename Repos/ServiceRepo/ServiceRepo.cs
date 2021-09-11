@@ -27,6 +27,11 @@ namespace LegoApi.Repos.ServiceRepo
             return context.Services.ToList();
         }
 
-   
+        public Service GetServiceByID(int id)
+        {
+            return context.Services.Find(id);
+        }
+
+
     }
 }

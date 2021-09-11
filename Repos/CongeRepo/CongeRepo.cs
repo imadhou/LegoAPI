@@ -26,5 +26,10 @@ namespace LegoApi.Repos.CongeRepo
         {
             return context.Conges.ToList();
         }
+        public Conge GetCongeById(int id)
+        {
+            return context.Conges.Find(id);
+        }
+        
     }
 }

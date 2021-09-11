@@ -9,16 +9,8 @@ namespace LegoApi.Models
 {
     public class Developpeur: Employe
     {
-        [Required]
-        [MaxLength(100)]
         public string Post { get; set; }
-
-        [Required]
-        [MaxLength(100)]
         public string Langage { get; set; }
-
-        [Required]
         public int Experience { get; set; }
-
     }
 }

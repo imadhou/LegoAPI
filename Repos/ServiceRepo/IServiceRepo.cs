@@ -10,5 +10,6 @@ namespace LegoApi.Repos.ServiceRepo
     {
         void AddService(Service service);
         IEnumerable<Service> GetAllServices();
+        Service GetServiceByID(int id);
     }
 }
