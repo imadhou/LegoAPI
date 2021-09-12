@@ -62,6 +62,13 @@ namespace LegoApi.Middleware
                     message = ex.Message;
                 }
 
+                if(exceptionType == typeof(LoginException))
+                {
+                    statuscode = HttpStatusCode.Forbidden;
+                    //replace ex.Message
+                    message = ex.Message;
+                }
+
                 if (env.IsDevelopment())
                 {
                     response = new ApiError((int)statuscode, ex.Message, ex.StackTrace.ToString());

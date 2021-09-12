@@ -18,6 +18,10 @@ namespace LegoApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(configHost =>
+                {
+                    configHost.AddEnvironmentVariables(prefix: "LEGO_");
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

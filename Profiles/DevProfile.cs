@@ -18,6 +18,9 @@ namespace LegoApi.Profiles
             CreateMap<Developpeur, DeveloppeurRead>();
             CreateMap<DeveloppeurRead, Developpeur>();
 
+            CreateMap<Developpeur, DeveloperUpdate>();
+            CreateMap<DeveloperUpdate, Developpeur>();
+
             CreateMap<Conge, CongeDTO>();
             CreateMap<CongeDTO, Conge>();
 

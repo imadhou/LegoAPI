@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using LegoApi.Extensions;
 using LegoApi.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace LegoApi
 {
@@ -28,13 +31,13 @@ namespace LegoApi
         }
 
         public IConfiguration Configuration { get; }
-
+            
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddDbContext<LegoApiContext>(options =>
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped< IEmployeRepo, EmployeRepo>();
             services.AddScoped< IServiceRepo, ServiceRepo>();
             services.AddScoped< ICongeRepo, CongeRepo>();
@@ -47,6 +50,21 @@ namespace LegoApi
             });
             services.AddCors(options => options.AddDefaultPolicy(builder =>
             builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
+            var jwtSecret = Configuration.GetSection("AppSettings:JWT_SECRET").Value;
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateIssuerSigningKey = true,
+                        ValidateAudience = false,
+                        IssuerSigningKey = key,
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +86,7 @@ namespace LegoApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

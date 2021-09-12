@@ -8,6 +8,7 @@ using LegoApi.Repos.CongeRepo;
 using LegoApi.Repos.EmployeCongeRepo;
 using LegoApi.Repos.EmployeRepo;
 using LegoApi.Repos.ServiceRepo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,6 +20,7 @@ using System.Threading.Tasks;
 
 namespace LegoApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/v1/employes")]
     public class EmployeController : ControllerBase
@@ -29,7 +31,13 @@ namespace LegoApi.Controllers
         private readonly IServiceRepo sRepo;
         private readonly ICongeRepo cRepo;
 
-        public EmployeController(IEmployeRepo repo, IEmployeCongeRepo repo1, IMapper mapper, IServiceRepo sRepo, ICongeRepo cRepo)
+        public EmployeController(
+            IEmployeRepo repo,
+            IEmployeCongeRepo repo1,
+            IMapper mapper,
+            IServiceRepo sRepo,
+            ICongeRepo cRepo
+            )
         {
             this.repo = repo;
             this.repo1 = repo1;
@@ -99,13 +107,13 @@ namespace LegoApi.Controllers
             return Ok(devsR);
         }
 
+
+        //Get a dev by id
+        //1- Check existance of dev
         [HttpGet]
         [Route("developpeurs/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeveloppeurRead))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-
-        //Get a dev by id
-        //1- Check existance of dev
         public IActionResult GetDeveloperById(int id)
         {
             var devs = repo.GetById(id);
@@ -155,7 +163,15 @@ namespace LegoApi.Controllers
         }
 
 
-
-
+        //Update a developer TODO
+        //-1 Check dev
+        //-2 Check service
+        //-3 update
+        //[HttpPut]
+        //[Route("developpeurs/{id}")]
+        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeveloppeurRead))]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        
     }
 }
